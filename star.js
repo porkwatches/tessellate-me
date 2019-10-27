@@ -37,8 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log(arrayToPath(pathPoints))
 
   
-  for (var i = 0, len = pathPoints.length; i < len; i++) {
-  //for (var i = 3; i < 6; i++) {
+  for (var i = 1, len = pathPoints.length; i < len - 1; i++) {
     var handle = document.createElementNS(sns, 'use')
 
     var newPoint = root.createSVGPoint()
