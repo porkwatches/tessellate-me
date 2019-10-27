@@ -5,17 +5,17 @@
 <script type="text/javascript" xlink:href="star.js"/>
 <defs>
     <circle id="point-handle"
-        r="10" x="0" y="0"
-        stroke-width="4"
+        r="5" x="0" y="0"
+        stroke-width="2"
         fill="#fff"
         fill-opacity="0.4"
         stroke="#fff"/>
 </defs>
-<polygon id="star"
-    stroke="#29e"
-    stroke-width="20"
-    stroke-linejoin="round"
-    fill="none"
-    points="260.8676170428898331,219.7770876399966369 297.8074659814675442,334.6204278639912673 200.0000000000000000,264.0000000000000000 102.1925340185324700,334.6204278639912673 139.1323829571101669,219.7770876399966369 41.7441956884864567,148.5795721360087214 162.3817438532817334,148.2229123600033631 200.0000000000000284,33.5999999999999943 237.6182561467182950,148.2229123600033631 358.2558043115135433,148.5795721360087498"/>
+
+
+<path id="path1" d="M 100,100 125,104 150,100" style="fill:none;stroke:#000000;stroke-width:5.26458332px"/>
+<use transform=" rotate(0 50 0) translate(50,0)" xlink:href="#path1"/>
+
+
 </svg>
 
