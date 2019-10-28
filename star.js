@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var rootMatrix
   var originalPoints = []
-  var transformedPoints = []
 
   function pathToArray(path){
   // split "M 100,100 125,104 150,100"
@@ -64,10 +63,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // remains the same otherwise (even when dragging handles around) 
     console.log("CALLING applyTransforms")
     rootMatrix = root.getScreenCTM()
-
-    transformedPoints = originalPoints.map(function (point) {
-      return point.matrixTransform(rootMatrix)
-    })
   }
 
 
