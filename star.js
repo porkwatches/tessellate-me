@@ -33,27 +33,19 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   var pathPoints = pathToArray(path)
-  console.log(arrayToPath(pathPoints))
-
-  
   for (var i = 1, len = pathPoints.length; i < len - 1; i++) {
     var handle = document.createElementNS(sns, 'use')
 
     var newPoint = root.createSVGPoint()
-	console.log(handle)
 
-	console.log(i)
     handle.setAttributeNS(xns, 'href', '#point-handle')
     handle.setAttribute('class', 'point-handle')
 
     handle.x.baseVal.value = newPoint.x = pathPoints[i][0]
     handle.y.baseVal.value = newPoint.y = pathPoints[i][1]
-
     handle.setAttribute('data-index', i)
 
     originalPoints.push(newPoint)
-    console.log(newPoint)
-
     root.appendChild(handle)
   }
 
@@ -61,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
   function applyTransforms (event) {
     // rootMatrix changes when the window is resized;
     // remains the same otherwise (even when dragging handles around) 
-    console.log("CALLING applyTransforms")
     rootMatrix = root.getScreenCTM()
   }
 
@@ -71,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
   interact('.point-handle', { context: document })
     .draggable({
       onstart: function (event) {
-        console.log("DRAGGIN'")
         root.setAttribute('class', 'dragging')
       },
       onmove: function (event) {
@@ -81,34 +71,22 @@ document.addEventListener('DOMContentLoaded', function () {
         // event is dragmove (?)
         // event.target is a point-handle element
 
-        console.log("MOVIN'")
-        console.log(event)
-        console.log(event.target)
         var i = event.target.getAttribute('data-index') | 0
         var point = pathToArray(path)[i]
 
-        console.log("MAT:")
-        console.log(rootMatrix.a)
-        console.log(rootMatrix.d)
         point[0] += event.dx / rootMatrix.a
         point[1] += event.dy / rootMatrix.d
 
         event.target.x.baseVal.value = point[0]
         event.target.y.baseVal.value = point[1]
-        console.log("EVENT TARGET")
-        console.log(event.target)
 
         pathPoints[i][0] = point[0]
         pathPoints[i][1] = point[1]
         var newPath = arrayToPath(pathPoints)
 		path.setAttribute("d", newPath)
         var pp = pathToArray(path)
-        console.log("NEW PATH")
-        console.log(path.getAttribute("d"))
-
       },
       onend: function (event) {
-        console.log("ONEND")
         root.setAttribute('class', '')
       },
       restrict: { restriction: document.rootElement }
