@@ -13,9 +13,11 @@
 </defs>
 
 
-<path id="path1" d="M 100,100 125,100 150,100 175,100 200,100" style="fill:none;stroke:#000000;stroke-width:5.26458332px"/>
-<use transform=" rotate(0 100 0) translate(100,0)" xlink:href="#path1"/>
+<path id="hor" d="M 100,100 125,100 150,100 175,100 200,100" style="fill:none;stroke:#000000;stroke-width:5.26458332px"/>
+<use transform=" rotate(0 100 0) translate(100,0)" xlink:href="#hor"/>
 
+<path id="vert" d="M 100,100 100,125 100,150 100,175 100,200" style="fill:none;stroke:#000000;stroke-width:5.26458332px"/>
+<use transform=" rotate(0 100 0) translate(100,0)" xlink:href="#vert"/>
 
 </svg>
 

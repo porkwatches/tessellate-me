@@ -7,10 +7,21 @@ document.addEventListener('DOMContentLoaded', function () {
   var sns = 'http://www.w3.org/2000/svg'
   var xns = 'http://www.w3.org/1999/xlink'
   var root = document.getElementById('star-demo')
-  var path = document.getElementById('path1')
 
+  var hor = {
+    originalPoints: [],
+    path: document.getElementById('hor'),
+  };
+  var vert = {
+    originalPoints: [],
+    path: document.getElementById('vert'),
+  };
+
+  var edges = {
+    "hor": hor,
+    "vert": vert,
+  }
   var rootMatrix
-  var originalPoints = []
 
   function pathToArray(path){
   // split "M 100,100 125,104 150,100"
@@ -32,23 +43,30 @@ document.addEventListener('DOMContentLoaded', function () {
     return pathString;
   };
 
-  var pathPoints = pathToArray(path)
-  for (var i = 1, len = pathPoints.length; i < len - 1; i++) {
-    var handle = document.createElementNS(sns, 'use')
+  function initPoints(edgeKey, edge){
+    for (var i = 1, len = edge.pathPoints.length; i < len - 1; i++) {
+      var path = edge.path
+      var handle = document.createElementNS(sns, 'use')
 
-    var newPoint = root.createSVGPoint()
+      var newPoint = root.createSVGPoint()
+      handle.setAttributeNS(xns, 'href', '#point-handle')
+      handle.setAttribute('class', 'point-handle')
 
-    handle.setAttributeNS(xns, 'href', '#point-handle')
-    handle.setAttribute('class', 'point-handle')
+      handle.x.baseVal.value = newPoint.x = edge.pathPoints[i][0]
+      handle.y.baseVal.value = newPoint.y = edge.pathPoints[i][1]
 
-    handle.x.baseVal.value = newPoint.x = pathPoints[i][0]
-    handle.y.baseVal.value = newPoint.y = pathPoints[i][1]
-    handle.setAttribute('data-index', i)
+      handle.setAttribute('edge-key', edgeKey)
+      handle.setAttribute('data-index', i)
 
-    originalPoints.push(newPoint)
-    root.appendChild(handle)
+      hor.originalPoints.push(newPoint)
+      root.appendChild(handle)
+    }
+  };
+
+  for (var key in edges){
+    edges[key].pathPoints = pathToArray(edges[key].path) // refactor into initialization
+    initPoints(key, edges[key])
   }
-
 
   function applyTransforms (event) {
     // rootMatrix changes when the window is resized;
@@ -71,8 +89,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // event is dragmove (?)
         // event.target is a point-handle element
 
+        var edgeKey = event.target.getAttribute('edge-key')
         var i = event.target.getAttribute('data-index') | 0
-        var point = pathToArray(path)[i]
+        var point = pathToArray(edges[edgeKey].path)[i]
 
         point[0] += event.dx / rootMatrix.a
         point[1] += event.dy / rootMatrix.d
@@ -80,11 +99,11 @@ document.addEventListener('DOMContentLoaded', function () {
         event.target.x.baseVal.value = point[0]
         event.target.y.baseVal.value = point[1]
 
-        pathPoints[i][0] = point[0]
-        pathPoints[i][1] = point[1]
-        var newPath = arrayToPath(pathPoints)
-		path.setAttribute("d", newPath)
-        var pp = pathToArray(path)
+        edges[edgeKey].pathPoints[i][0] = point[0]
+        edges[edgeKey].pathPoints[i][1] = point[1]
+
+        var newPath = arrayToPath(edges[edgeKey].pathPoints)
+        edges[edgeKey].path.setAttribute("d", newPath)
       },
       onend: function (event) {
         root.setAttribute('class', '')
