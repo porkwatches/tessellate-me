@@ -68,14 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
     transformedPoints = originalPoints.map(function (point) {
       return point.matrixTransform(rootMatrix)
     })
-
-    interact('.point-handle', { context: document }).draggable({
-      snap: {
-        targets: transformedPoints,
-        range: 20 * Math.max(rootMatrix.a, rootMatrix.d)
-      }
-    })
-
   }
 
 
