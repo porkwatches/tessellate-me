@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var sns = 'http://www.w3.org/2000/svg'
   var xns = 'http://www.w3.org/1999/xlink'
-  var root = document.getElementById('star-demo')
+  var root = document.getElementById('tess')
 
   var hor = {
     originalPoints: [],
