@@ -2,6 +2,31 @@
 <head>
 </head>
     <body>
+        <select id="patternTypeSelect" onchange="showSelectedPattern()">
+            <option value="tess">square</option>
+            <option value="hexSVG">hex</option>
+        </select>
         <object id="tess" type="image/svg+xml" data="tess.svg"></object>
+        <object id="hexSVG" type="image/svg+xml" data="hex.svg"></object>
+        <script>
+
+            function showSelectedPattern() {
+
+                // TODO remove duplication
+                var sq = document.getElementById("tess")
+                var h = document.getElementById("hexSVG")
+                sq.style.display = "none"
+                h.style.display = "none"
+
+                var e = document.getElementById("patternTypeSelect");
+                var strSelect = e.value;
+
+                var pat = document.getElementById(strSelect)
+                pat.style.display = "none"
+                pat.style.display = "block"
+
+            }
+            showSelectedPattern()
+        </script>
     </body>
 </html>

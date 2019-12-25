@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet href="tess.css" type="text/css"?>
+
+
+
+
+<svg viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+  <style>
+  </style>
+
+  <text x="40" y="35" class="heavy">HEX</text>
+  <text x="65" y="55" class="Rrrrr">PATTERN</text>
+</svg>
+
+
+
+
