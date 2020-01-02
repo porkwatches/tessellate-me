@@ -6,19 +6,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var sns = 'http://www.w3.org/2000/svg'
   var xns = 'http://www.w3.org/1999/xlink'
-  var root = document.getElementById('tess')
+  var root = document.getElementsByTagName("svg")[0]
+  var selectedPatternType = root.id
   var rootMatrix
-  var selectedPatternType = "tess" // TODO
 
   var edges = {
     tess: [
       ,"hor"
       ,"vert"
     ],
+    hex: [
+      ,"path0"
+      ,"path1"
+      ,"path2"
+    ]
   }
 
   var edgeContainer = {}
   for (var patternType in edges){
+    // TODO: get rid of outer loop instead of skipping?
+    if (patternType != selectedPatternType) continue
+
     edgeContainer[patternType] = {}
     for (var i in edges[patternType]){
       var edgeKey = edges[patternType][i]
