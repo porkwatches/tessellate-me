@@ -1,45 +1,30 @@
-function tess () {
-  'use strict'
 
-  // get the interact variable from the parent window
-//  var interact = window.parent.interact
+function getEdgeIDs(root) {
+  paths = root.getElementsByTagName("path")
+  var edgeIDs = []
+  for (var i = 0; i < paths.length; i++) {
+    edgeIDs.push(paths[i].id)
+  }
+  return edgeIDs
+}
+
+function tess(document, root) {
+  'use strict'
 
   var sns = 'http://www.w3.org/2000/svg'
   var xns = 'http://www.w3.org/1999/xlink'
-  var root = document.getElementsByTagName("svg")[0]
-  var selectedPatternType = root.id
   var rootMatrix
 
-  var edges = {
-    tess: [
-      ,"hor"
-      ,"vert"
-    ],
-    template: [
-      ,"hor"
-      ,"vert"
-    ],
-    hex: [
-      ,"path0"
-      ,"path1"
-      ,"path2"
-    ]
-  }
+  var edges = getEdgeIDs(root)
 
   var edgeContainer = {}
-  for (var patternType in edges){
-    // TODO: get rid of outer loop instead of skipping?
-    if (patternType != selectedPatternType) continue
-
-    edgeContainer[patternType] = {}
-    for (var i in edges[patternType]){
-      var edgeKey = edges[patternType][i]
-      edgeContainer[patternType][edgeKey] = {
-        path: document.getElementById(edgeKey),
-        pathPoints: pathToArray(document.getElementById(edgeKey)),
-      }
-      initPoints(edgeKey, edgeContainer[patternType][edgeKey])
+  for (var i in edges) {
+    var edgeKey = edges[i]
+    edgeContainer[edgeKey] = {
+      path: document.getElementById(edgeKey),
+      pathPoints: pathToArray(document.getElementById(edgeKey)),
     }
+    initPoints(edgeKey, edgeContainer[edgeKey])
   }
 
   function pathToArray(path){
@@ -54,10 +39,7 @@ function tess () {
   // inverse of pathToArray
     var pathString = "M"
 	for (var i = 0, len = points.length; i < len; i++) {
-      pathString += " "
-      pathString += points[i][0] // cast to string explicitly?
-      pathString += ","
-      pathString += points[i][1]
+      pathString += ` ${points[i][0]},${points[i][1]}`
     }
     return pathString;
   };
@@ -103,7 +85,7 @@ function tess () {
         // event.target is a point-handle element
 
         var edgeKey = event.target.getAttribute('edge-key')
-        var edge = edgeContainer[selectedPatternType][edgeKey]
+        var edge = edgeContainer[edgeKey]
         var i = event.target.getAttribute('data-index') | 0
         var point = pathToArray(edge.path)[i]
         var newPath
@@ -131,5 +113,3 @@ function tess () {
     event.preventDefault()
   })
 }
-
-document.addEventListener('DOMContentLoaded', tess)
