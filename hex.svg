@@ -4,6 +4,9 @@
 	<script type="text/javascript" xlink:href="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"/>
 	<!-- <script type="text/javascript" xlink:href="interact.min.js"/> -->
 	<script type="text/javascript" xlink:href="tess.js"/>
+	<!-- <script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', tess)
+	</script> -->
 	<defs>
 		<circle id="point-handle"
 			r="2" x="0" y="0"

@@ -3,11 +3,13 @@
 </head>
     <body>
         <select id="patternTypeSelect" onchange="showSelectedPattern()">
-            <option value="tess">square</option>
+            <option value="template">template</option>
             <option value="hexSVG">hex</option>
+            <option value="tess">square</option>
         </select>
         <object id="tess" type="image/svg+xml" data="tess.svg"></object>
         <object id="hexSVG" type="image/svg+xml" data="hex.svg"></object>
+        <object id="template" type="image/svg+xml" data="template.svg"></object>
         <script>
 
             function showSelectedPattern() {
@@ -15,8 +17,10 @@
                 // TODO remove duplication
                 var sq = document.getElementById("tess")
                 var h = document.getElementById("hexSVG")
+                var t = document.getElementById("template")
                 sq.style.display = "none"
                 h.style.display = "none"
+                t.style.display = "none"
 
                 var e = document.getElementById("patternTypeSelect");
                 var strSelect = e.value;
@@ -27,6 +31,19 @@
 
             }
             showSelectedPattern()
+
+            window.addEventListener("load", function() {
+                var sns = 'http://www.w3.org/2000/svg'
+                var xns = 'http://www.w3.org/1999/xlink'
+                var svgObject = document.getElementById("template").contentDocument;
+                var svg = svgObject.getElementById("template")
+                var handle = document.createElementNS(sns, 'use')
+
+                // TODO create all geometry here
+                handle.setAttributeNS(xns, 'href', '#hor')
+                handle.setAttribute("transform", " rotate(13 100 -50) translate(100,-50)")
+                svg.getElementById("geo").appendChild(handle)
+            })
         </script>
     </body>
 </html>

@@ -3,6 +3,9 @@
 <svg id="tess" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<script type="text/javascript" xlink:href="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"/>
 	<script type="text/javascript" xlink:href="tess.js"/>
+	<!-- <script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', tess)
+	</script> -->
 	<defs>
 		<circle id="point-handle"
 			r="2" x="0" y="0"

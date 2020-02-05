@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+function tess () {
   'use strict'
 
   // get the interact variable from the parent window
@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var edges = {
     tess: [
+      ,"hor"
+      ,"vert"
+    ],
+    template: [
       ,"hor"
       ,"vert"
     ],
@@ -126,5 +130,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('dragstart', function (event) {
     event.preventDefault()
   })
+}
 
-})
+document.addEventListener('DOMContentLoaded', tess)

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet href="tess.css" type="text/css"?>
+<svg id="template" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<script type="text/javascript" xlink:href="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"/>
+	<!-- <script type="text/javascript" xlink:href="interact.min.js"/> -->
+	<script type="text/javascript" xlink:href="tess.js"/>
+	<defs>
+		<circle id="point-handle"
+			r="2" x="0" y="0"
+			stroke-width="2"
+			fill="#f00"
+			fill-opacity="0.4"
+			stroke="#ddd"/>
+	</defs>
+
+	<g id="geo">
+
+		<path id="hor" d="M 50,50 62.5,50 75,50 87.5,50 100,50" style="fill:none;stroke:#000000;stroke-width:2px"/>
+		<path id="vert" d="M 50,50 50,62.5 50,75 50,87.5 50,100" style="fill:none;stroke:#000000;stroke-width:2px"/>
+
+		<use transform=" rotate(0 0 -50) translate(-50,-50)" xlink:href="#hor"/>
+		<use transform=" rotate(0 0 -50) translate(-50,-50)" xlink:href="#vert"/>
+		<use transform=" rotate(0 0 -50) translate(0,-50)" xlink:href="#hor"/>
+		<use transform=" rotate(0 0 -50) translate(0,-50)" xlink:href="#vert"/>
+		<use transform=" rotate(0 50 -50) translate(50,-50)" xlink:href="#hor"/>
+		<use transform=" rotate(0 50 -50) translate(50,-50)" xlink:href="#vert"/>
+		<use transform=" rotate(0 100 -50) translate(100,-50)" xlink:href="#hor"/>
+
+	</g>
+</svg>
+
